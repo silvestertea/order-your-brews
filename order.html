@@ -149,7 +149,7 @@
         </div>
 
         <div class="client-form">
-            <button id="more-items" onclick="window.location.href='index.html'">Add More Items</button>
+            <button id="more-items" onclick="window.location.href='main.html'">Add More Items</button>
             <h3>Fill this details</h3>
             <label for="name">Name:</label>
             <input type="text" id="name" placeholder="Enter your name">
@@ -207,7 +207,7 @@
                     `<div class="cart-item">
                        <p>${item.name} - ${item.price}</p>
                        <img src="${item.image}" width="50"> 
-                       <button class="remove-btn" data-index="${index}">Remove</button>
+                       <button class="remove-btn" data-main="${main}">Remove</button>
                     </div>`
                 ).join("");
                 updateTotalCost();
@@ -215,11 +215,11 @@
             function updateTotalCost() {
                 let totalCost = cart.reduce((sum, item) => sum + parseFloat(item.price.replace(/[^0-9.]/g, "")), 0);
                 function renderCart() {
-    cartContainer.innerHTML = cart.map((item, index) => 
+    cartContainer.innerHTML = cart.map((item, main) => 
         `<div class="cart-item">
             <p>${item.name} - ${item.price}</p>
             <img src="${item.image}" width="50"> 
-            <button class="remove-btn" data-index="${index}">Remove</button>
+            <button class="remove-btn" data-main="${main}">Remove</button>
         </div>`
     ).join("");
     updateTotalCost();
@@ -236,8 +236,8 @@
 
             cartContainer.addEventListener("click", function (event) {
                 if (event.target.classList.contains("remove-btn")) {
-                    const index = event.target.dataset.index;
-                    cart.splice(index, 1);
+                    const main = event.target.dataset.main;
+                    cart.splice(main, 1);
                     localStorage.setItem("cart", JSON.stringify(cart));
                     renderCart();
                 }
